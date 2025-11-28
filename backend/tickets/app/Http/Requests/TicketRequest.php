@@ -8,7 +8,7 @@ class TicketRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // ajustar según auth
+        return true; 
     }
 
     public function rules()
