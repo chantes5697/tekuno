@@ -107,7 +107,9 @@ export default {
     <table class="table table-striped" v-if="tickets.length && !loading">
       <thead class="table-light">
         <tr>
+          <th>ID</th>
           <th>Título</th>
+          <th>Descripción</th>
           <th>Status</th>
           <th>Priority</th>
           <th>Acciones</th>
@@ -116,7 +118,9 @@ export default {
 
       <tbody>
         <tr v-for="t in tickets" :key="t.id">
+          <td>{{ t.id }}</td>
           <td>{{ t.title }}</td>
+          <td>{{ t.description }}</td>
           <td>{{ t.status }}</td>
           <td>{{ t.priority }}</td>
           <td>
