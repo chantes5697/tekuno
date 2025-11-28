@@ -12,4 +12,4 @@ y ejecutar el archivo tekuno-2025-11-27.sql de la carpeta backend
 
 para la ejecucion de la aplicacion en laravel, se debe ejecutar la linea de comandos en la carpeta tickets de la carpeta backend con php artisan serve
 
-para la ejecucion del frontend se debe ejecutar en la linea de comandos en la carpeta tickets-client de la carpeta frontend
+para la ejecucion del frontend se debe ejecutar en la linea de comandos en la carpeta tickets-client de la carpeta frontend con el comando npm run dev
