@@ -1,5 +1,5 @@
 <script>
-import api from "../api";
+import api from "@/api";
 
 export default {
   data() {
@@ -19,8 +19,8 @@ export default {
       try {
         await api.post("/tickets", this.form);
         this.$emit("created");
-      } catch (e) {
-        this.error = "Error al crear el ticket";
+      } catch (err) {
+        this.error = "No se pudo crear el ticket.";
       }
     }
   }
@@ -45,7 +45,7 @@ export default {
 
     <div class="mb-3">
       <label>Status</label>
-      <select v-model="form.status" class="form-control">
+      <select v-model="form.status" class="form-select">
         <option value="open">Open</option>
         <option value="pending">Pending</option>
         <option value="closed">Closed</option>
@@ -53,11 +53,11 @@ export default {
     </div>
 
     <div class="mb-3">
-      <label>Prioridad</label>
-      <select v-model="form.priority" class="form-control">
-        <option value="low">Baja</option>
-        <option value="medium">Media</option>
-        <option value="high">Alta</option>
+      <label>Priority</label>
+      <select v-model="form.priority" class="form-select">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
       </select>
     </div>
 

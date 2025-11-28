@@ -21,7 +21,7 @@ class TicketController extends Controller{
         }
 
         if ($request->filled('priority')) {
-            $query->where('priority', $request->query('status'));
+            $query->where('priority', $request->query('priority'));
         }
 
         if ($request->filled('title')) {

@@ -10,14 +10,14 @@ export default {
     return {
       currentView: "list",
       selectedTicketId: null,
-      reloadKey: 0    // 🔥 fuerza a recargar TicketList
+      reloadKey: 0
     };
   },
 
   methods: {
     showList() {
       this.currentView = "list";
-      this.reloadKey++;   // 🔥 recargar TicketList
+      this.reloadKey++;
     },
     showCreate() {
       this.currentView = "create";
@@ -25,7 +25,7 @@ export default {
     showEdit(id) {
       this.selectedTicketId = id;
       this.currentView = "edit";
-    },
+    }
   }
 };
 </script>
@@ -33,12 +33,12 @@ export default {
 <template>
   <div class="container mt-4">
 
-    <nav class="navbar navbar-light bg-light p-3 rounded mb-4">
-      <button class="btn btn-primary me-2" @click="showList">Lista de Tickets</button>
+    <nav class="navbar bg-light p-3 rounded mb-4">
+      <button class="btn btn-primary me-2" @click="showList">Tickets</button>
       <button class="btn btn-success" @click="showCreate">Crear Ticket</button>
     </nav>
 
-    <TicketList 
+    <TicketList
       v-if="currentView === 'list'"
       :key="reloadKey"
       @edit="showEdit"
@@ -51,11 +51,12 @@ export default {
       @created="showList"
     />
 
-    <EditTicket 
+    <EditTicket
       v-if="currentView === 'edit'"
       :ticketId="selectedTicketId"
       @cancel="showList"
       @updated="showList"
     />
+
   </div>
 </template>
