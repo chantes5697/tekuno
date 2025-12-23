@@ -1,0 +1,95 @@
+<!-- src/components/TicketList.vue -->
+<template>
+  <div>
+    <div class="topbar">
+      <h2>Tickets</h2>
+      <button @click="openCreate" class="btn-create">+ Crear ticket</button>
+    </div>
+
+    <div v-if="loading">Cargando...</div>
+    <div v-if="error" class="error">{{ error }}</div>
+
+    <ul>
+      <li v-for="ticket in items" :key="ticket.id">
+        {{ ticket.title }} - {{ ticket.status }} - {{ ticket.priority }}
+      </li>
+    </ul>
+
+    <!-- Modal Crear/Editar -->
+    <div v-if="showModal" class="overlay">
+      <div class="modal">
+        <h3>{{ editingTicket ? 'Editar' : 'Crear ticket' }}</h3>
+
+        <TicketForm
+          :modelValue="editingTicket"
+          @saved="onSaved"
+          @cancel="closeModal"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useTickets } from '../composables/useTickets';
+import TicketForm from './TicketForm.vue';
+
+const { items, loading, error, fetchTickets } = useTickets();
+
+const showModal = ref(false);
+const editingTicket = ref(null);
+
+onMounted(() => {
+  fetchTickets();
+});
+
+function openCreate() {
+  editingTicket.value = null;
+  showModal.value = true;
+}
+
+function closeModal() {
+  showModal.value = false;
+}
+
+async function onSaved() {
+  closeModal();
+  await fetchTickets();
+}
+</script>
+
+<style scoped>
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.btn-create {
+  padding: 6px 12px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error { color: red; }
+
+/* Modal simple */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #00000066;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  background: white;
+  padding: 1rem;
+  width: 400px;
+  border-radius: 6px;
+}
+</style>
